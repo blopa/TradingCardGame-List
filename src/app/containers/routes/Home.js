@@ -11,7 +11,7 @@ export class Home extends React.Component {
   render() {
     return (
       <Main>
-        <p>Hello World</p>
+        <p>Home!</p>
       </Main>
     );
   }

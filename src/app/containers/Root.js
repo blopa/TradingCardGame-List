@@ -5,8 +5,10 @@ import {Header} from './Header';
 import {Home} from './routes/Home';
 import '../styles/Root.css';
 import PropTypes from 'prop-types';
-import {API_URL} from '../helper/define';
+import {CARDSLIST_API_URL} from '../helper/define';
 import {fetchData} from '../helper/functions';
+import {CreateList} from './routes/CreateList';
+import {DisplayList} from './routes/DisplayList';
 
 class Root extends React.Component {
   componentDidMount() {
@@ -14,7 +16,6 @@ class Root extends React.Component {
   }
   fetchLists() {
     const p = d => {
-      debugger;
       this.loadList(d.data);
       this.setState({
         loadedData: true
@@ -25,7 +26,7 @@ class Root extends React.Component {
         requestFailed: true
       });
     };
-    fetchData(`${API_URL}lists`, p, ep);
+    fetchData(`${CARDSLIST_API_URL}lists`, p, ep);
   }
   constructor(props) {
     super(props);
@@ -65,6 +66,8 @@ class Root extends React.Component {
         <Header />
         <Switch>
           <Route exact path="/" render={props => this.renderHome(props)}/>
+          <Route exact path="/create" component={CreateList}/>
+          <Route exact path="/list/:hash" component={DisplayList}/>
           <Redirect to="/" />
         </Switch>
       </div>
