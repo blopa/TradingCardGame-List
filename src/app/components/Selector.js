@@ -25,11 +25,18 @@ export class Selector extends React.Component {
   }
   onClick(e) {
     this.props.onClick(e.target.value);
-  }
-  onFocusOut() {
     this.setState({
       data: []
     });
+  }
+  onFocusOut() {
+    let hovers = document.querySelectorAll(':hover');
+    let hover = hovers[hovers.length- 1];
+    if (!hover.hasAttribute('selector_list_item')) {
+      this.setState({
+        data: []
+      });
+    }
   }
   onFocus(e) {
     if (e.target.value) {
@@ -48,20 +55,23 @@ export class Selector extends React.Component {
           onBlur={this.onFocusOut}
           onFocus={this.onFocus}
         />
-        {this.state.data.length > 0 ? (
-          <ul className={this.props.classNames.list}>
-            {this.state.data.map(function (data, key) {
-              return (
-                <li
-                  onClick={this.onClick}
-                  className={this.props.classNames.list_item}
-                  key={key}
-                  value={data.value}
-                >{data.title}</li>
-              )
-            }.bind(this))}
-          </ul>
-        ) : null}
+        <div>
+          {this.state.data.length > 0 ? (
+            <ul className={this.props.classNames.list}>
+              {this.state.data.map(function (data, key) {
+                return (
+                  <li
+                    onClick={this.onClick}
+                    className={this.props.classNames.list_item}
+                    key={key}
+                    value={data.value}
+                    selector_list_item=""
+                  >{data.title}</li>
+                )
+              }.bind(this))}
+            </ul>
+          ) : null}
+        </div>
       </div>
     );
   }
