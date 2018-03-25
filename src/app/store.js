@@ -1,23 +1,23 @@
 import {createStore} from 'redux';
 
 const initialState = {
-  questions: [] // {id: 1, question: '', answer: ''}
+  lists: [] // {id: 1, hash: '', type: 0, cards: ''}
 };
 
 const reducer = (state = initialState, action) => {
   const newState = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case 'ADD':
-      newState.questions.push(action.payload.question);
+      newState.lists.push(action.payload.list);
+      break;
+    case 'LOAD':
+      newState.lists = action.payload.lists;
       break;
     case 'UPDATE':
-      newState.questions = action.payload.questions;
+      newState.lists = action.payload.lists;
       break;
-    case 'SORT':
-      newState.questions = newState.questions.sort((a, b) => a.question.toUpperCase() > b.question.toUpperCase());
-      break;
-    case 'REMOVE_ALL':
-      newState.questions = [];
+    case 'REMOVE':
+      newState.lists = [];
       break;
     default:
       break;
