@@ -1,9 +1,9 @@
 import React from 'react';
 import {Main} from '../../components/Main.js';
 
-import '../../styles/Home.css';
+import '../../styles/DisplayList.css';
 
-export class Home extends React.Component {
+export class DisplayList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -11,15 +11,12 @@ export class Home extends React.Component {
   render() {
     return (
       <Main>
-        <div>
-          <p>Home!</p>
-          <a href="/#/create">Create List (TODO)</a>
-        </div>
+        <p>Display List {this.props.match.params.hash}</p>
       </Main>
     );
   }
 }
 
-Home.propTypes = {
+DisplayList.propTypes = {
   // https://reactjs.org/docs/typechecking-with-proptypes.html
 };
