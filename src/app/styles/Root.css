@@ -1,0 +1,16 @@
+body {
+    padding: 1rem;
+    max-width: 70rem;
+    min-width: 15rem;
+    margin: 0 auto;
+    background-color: #f7ffff;
+}
+
+html {
+    overflow:   scroll;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}

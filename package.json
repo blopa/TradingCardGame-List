@@ -1,0 +1,46 @@
+{
+  "name": "cards-list",
+  "version": "0.0.1",
+  "description": "Cards List Frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot",
+    "build": "webpack -p && cp src/index.html dist/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blopa/CardsList-Frontend.git"
+  },
+  "author": "Pablo Montenegro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blopa/CardsList-Frontend/issues"
+  },
+  "homepage": "https://github.com/blopa/CardsList-Frontend#readme",
+  "dependencies": {
+    "file-loader": "^1.1.9",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.7.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.18.0",
+    "eslint-loader": "^1.9.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0",
+    "style-loader": "^0.20.1",
+    "prop-types": "^15.6.0",
+    "css-loader": "^0.28.0"
+  }
+}
