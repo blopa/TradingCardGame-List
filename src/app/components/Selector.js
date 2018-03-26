@@ -17,7 +17,8 @@ export class Selector extends React.Component {
   onChange(e) {
     let data = [];
     if (e.target.value) {
-      data = this.props.onChange(e.target.value);
+      this.props.onChange(e.target.value);
+      data = this.props.selectorData;
     }
     this.setState({
       data: data
@@ -25,6 +26,7 @@ export class Selector extends React.Component {
   }
   onClick(e) {
     this.props.onClick(e.target.value);
+    e.target.value = '';
     this.setState({
       data: []
     });
@@ -32,16 +34,19 @@ export class Selector extends React.Component {
   onFocusOut() {
     let hovers = document.querySelectorAll(':hover');
     let hover = hovers[hovers.length- 1];
-    if (!hover.hasAttribute('selector_list_item')) {
-      this.setState({
-        data: []
-      });
+    if (hover) {
+      if (!hover.hasAttribute('selector_list_item')) {
+        this.setState({
+          data: []
+        });
+      }
     }
   }
   onFocus(e) {
     if (e.target.value) {
+      this.props.onChange(e.target.value);
       this.setState({
-        data: this.props.onChange(e.target.value)
+        data: this.props.selectorData
       });
     }
   }
@@ -81,5 +86,6 @@ Selector.propTypes = {
   // https://reactjs.org/docs/typechecking-with-proptypes.html
   classNames: PropTypes.object,
   onClick: PropTypes.func,
+  selectorData: PropTypes.array,
   onChange: PropTypes.func
 };
