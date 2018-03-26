@@ -11,43 +11,35 @@ export class Selector extends React.Component {
     this.onFocusOut = this.onFocusOut.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.state = {
-      data: [],
+      typedValue: '',
     };
   }
   onChange(e) {
-    let data = [];
-    if (e.target.value) {
+    const value = e.target.value;
+    if (value && this.state.typedValue !== value) {
+      this.setState({
+        typedValue: value
+      });
       this.props.onChange(e.target.value);
-      data = this.props.selectorData;
     }
-    this.setState({
-      data: data
-    });
   }
   onClick(e) {
     this.props.onClick(e.target.value);
     e.target.value = '';
-    this.setState({
-      data: []
-    });
   }
   onFocusOut() {
     let hovers = document.querySelectorAll(':hover');
     let hover = hovers[hovers.length- 1];
     if (hover) {
       if (!hover.hasAttribute('selector_list_item')) {
-        this.setState({
-          data: []
-        });
+        this.props.onChange('');
       }
     }
   }
   onFocus(e) {
-    if (e.target.value) {
+    const value = e.target.value;
+    if ((value && this.state.typedValue !== value) || this.props.selectorData.length <= 0) {
       this.props.onChange(e.target.value);
-      this.setState({
-        data: this.props.selectorData
-      });
     }
   }
   render() {
@@ -61,9 +53,9 @@ export class Selector extends React.Component {
           onFocus={this.onFocus}
         />
         <div>
-          {this.state.data.length > 0 ? (
+          {this.props.selectorData.length > 0 ? (
             <ul className={this.props.classNames.list}>
-              {this.state.data.map(function (data, key) {
+              {this.props.selectorData.map(function (data, key) {
                 return (
                   <li
                     onClick={this.onClick}

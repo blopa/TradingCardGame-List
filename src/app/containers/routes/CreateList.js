@@ -26,40 +26,73 @@ export class CreateList extends React.Component {
   }
   onClick(value) {
     debugger;
+    alert(this.state.selectorData[value].title)
+    this.setState({
+      selectorData: []
+    });
   }
   onChange(value) {
     // https://api.magicthegathering.io/v1/cards?name=masticore
-    if ((this.state.typedValue === value) && this.state.selectorData.length > 0)
+    if (!value) {
+      this.setState({
+        typedValue: value,
+        selectorData: []
+      });
       return;
-    this.setState({
-      typedValue: value,
-      selectorData: [{
-        title: 'Loading...',
-        value: 0
-      }]
-    });
+    }
+    if ((this.state.typedValue === value) && (this.state.selectorData.length > 0)) {
+      return;
+    }
+
     let timeNow = new Date().valueOf();
-    if (timeNow - this.state.lastAPICall > 2000) {
+    if (timeNow - this.state.lastAPICall > 500) {
       const p = d => {
-        let data = d.cards;
-        data.splice(10);
-        data = data.map(function (value) {
-          return {
-            title: value.name,
-            value: value.id
-          };
-        });
-        this.setState({
-          loadedData: true,
-          lastAPICall: (new Date().valueOf()),
-          selectorData: data
-        });
+        if (d.cards.length > 0) {
+          let data = [];
+          let objName = {};
+          let j = 0;
+          for (let i = 0; i < d.cards.length; i++) {
+            let key = btoa(d.cards[i].name);
+            if (!objName[key]) {
+              objName[key] = 1;
+              data.push({
+                title: d.cards[i].name,
+                value: j
+              });
+              j++;
+            }
+
+            if (j > 10) {
+              break;
+            }
+          }
+          this.setState({
+            loadedData: true,
+            lastAPICall: (new Date().valueOf()),
+            selectorData: data
+          });
+        } else {
+          this.setState({
+            typedValue: value,
+            selectorData: [{
+              title: 'Nothing found :(',
+              value: 0
+            }]
+          });
+        }
       };
       const ep = () => {
         this.setState({
           requestFailed: true
         });
       };
+      this.setState({
+        typedValue: value,
+        selectorData: [{
+          title: 'Loading...',
+          value: 0
+        }]
+      });
       fetchData(`${MAGIC_API_URL}cards?name=${value}`, p, ep);
     }
   }
