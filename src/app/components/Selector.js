@@ -25,7 +25,11 @@ export class Selector extends React.Component {
   }
   onClick(e) {
     this.props.onClick(e.target.value);
-    e.target.value = '';
+    const query = document.querySelectorAll('#selector-comp>input');
+    if (query) {
+      query[0].value = '';
+      query[0].focus();
+    }
   }
   onFocusOut() {
     const hovers = document.querySelectorAll(':hover');

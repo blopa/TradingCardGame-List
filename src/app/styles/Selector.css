@@ -1,3 +1,12 @@
 #selector-comp li:hover {
     cursor: pointer;
 }
+
+#selector-comp>div {
+    position: relative;
+}
+
+#selector-comp div>ul {
+    position: absolute;
+    width: 100%;
+}

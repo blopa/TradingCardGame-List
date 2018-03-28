@@ -26,14 +26,17 @@ export class CreateList extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.incrementCardQty = this.incrementCardQty.bind(this);
+    this.generateList = this.generateList.bind(this);
   }
-  incrementCardQty(value, type) {
+  incrementCardQty(key, type) {
     const localCardsList = JSON.parse(JSON.stringify(this.state.localCardsList));
     if (type === 1) {
-      localCardsList[value].qty += 1;
+      localCardsList[key].qty += 1;
     } else { // if (type === 0) {
-      if (localCardsList[value].qty > 1) {
-        localCardsList[value].qty -= 1;
+      if (localCardsList[key].qty > 1) {
+        localCardsList[key].qty -= 1;
+      } else {
+        localCardsList.splice(key, 1);
       }
     }
 
@@ -42,13 +45,21 @@ export class CreateList extends React.Component {
     });
   }
   onClick(value) {
-    debugger;
     const localCardsList = JSON.parse(JSON.stringify(this.state.localCardsList));
     localCardsList.push(this.state.selectorData[value]);
     this.setState({
       selectorData: [],
       localCardsList: localCardsList
     });
+  }
+  generateList() {
+    debugger;
+    let listString = '';
+    this.state.localCardsList.forEach(card => {
+      listString += `${card.qty},${card.id};`;
+    });
+
+    alert(btoa(listString));
   }
   onChange(value) {
     // https://api.magicthegathering.io/v1/cards?name=masticore
@@ -71,20 +82,22 @@ export class CreateList extends React.Component {
           const objName = {};
           let j = 0;
           for (let i = 0; i < d.cards.length; i++) {
-            const key = btoa(d.cards[i].name);
-            if (!objName[key]) {
-              objName[key] = 1;
-              data.push({
-                title: d.cards[i].name,
-                value: j,
-                qty: 1,
-                id: d.cards[i].multiverseid
-              });
-              j++;
-            }
+            if (d.cards[i].multiverseid) {
+              const key = btoa(d.cards[i].name);
+              if (!objName[key]) {
+                objName[key] = 1;
+                data.push({
+                  title: d.cards[i].name,
+                  value: j,
+                  qty: 1,
+                  id: d.cards[i].multiverseid
+                });
+                j++;
+              }
 
-            if (j > 10) {
-              break;
+              if (j > 10) {
+                break;
+              }
             }
           }
           this.setState({
@@ -133,6 +146,7 @@ export class CreateList extends React.Component {
             selectorData={this.state.selectorData}
             placeholder={'Type a card name here...'}
           />
+          <button onClick={this.generateList} type="button" className="btn btn-success">Generate</button>
         </div>
       </Main>
     );

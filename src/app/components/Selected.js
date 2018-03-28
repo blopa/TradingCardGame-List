@@ -9,11 +9,9 @@ export class Selected extends React.Component {
     this.decrementQty = this.decrementQty.bind(this);
   }
   incrementQty(e) {
-    debugger;
     this.props.qtyOnClick(e.target.getAttribute('data-value'), 1);
   }
   decrementQty(e) {
-    debugger;
     this.props.qtyOnClick(e.target.getAttribute('data-value'), 0);
   }
   render() {
