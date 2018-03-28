@@ -2,11 +2,34 @@
     cursor: pointer;
 }
 
-#selected-comp li>div>div {
+#selected-comp li>div>div:nth-child(2) {
+    position: absolute;
+    margin-top: -2rem;
+    margin-left: -1rem;
+}
+
+#selected-comp li>div>div:nth-child(2) button:nth-child(1){
+    background: darkolivegreen;
+}
+
+#selected-comp li>div>div:nth-child(2) button:nth-child(2){
+    background: indianred;
+}
+
+#selected-comp li>div>div:nth-child(2) button{
+    border: none;
+    width: 0.7rem;
+    font-size: 0.4rem;
+    padding: 0;
+    border-radius: 1rem;
+    margin-right: 0.2rem;
+}
+
+#selected-comp li>div>div:first-child {
     position: absolute;
     margin-top: -1.2rem;
     background: antiquewhite;
-    padding: 0.1rem 0.3rem;
+    padding: 0.2rem 0.3rem;
     border-radius: 1rem;
     margin-left: -1rem;
 }

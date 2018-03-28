@@ -25,6 +25,21 @@ export class CreateList extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.incrementCardQty = this.incrementCardQty.bind(this);
+  }
+  incrementCardQty(value, type) {
+    const localCardsList = JSON.parse(JSON.stringify(this.state.localCardsList));
+    if (type === 1) {
+      localCardsList[value].qty += 1;
+    } else { // if (type === 0) {
+      if (localCardsList[value].qty > 1) {
+        localCardsList[value].qty -= 1;
+      }
+    }
+
+    this.setState({
+      localCardsList: localCardsList
+    });
   }
   onClick(value) {
     debugger;
@@ -107,7 +122,10 @@ export class CreateList extends React.Component {
       <Main>
         <div>
           <p>Create List</p>
-          <Selected items={this.state.localCardsList} />
+          <Selected
+            items={this.state.localCardsList}
+            qtyOnClick={this.incrementCardQty}
+          />
           <Selector
             classNames={this.state.classNames}
             onChange={this.onChange}
