@@ -1,0 +1,24 @@
+#selected-comp li:hover {
+    cursor: pointer;
+}
+
+#selected-comp li>div>div {
+    position: absolute;
+    margin-top: -1.2rem;
+    background: antiquewhite;
+    padding: 0.1rem 0.3rem;
+    border-radius: 1rem;
+    margin-left: -1rem;
+}
+
+#selected-comp li>div>p {
+    margin-bottom: 0;
+}
+
+#selected-comp li {
+    background: aquamarine;
+    display: inline-block;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.4rem;
+}

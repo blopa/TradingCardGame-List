@@ -5,28 +5,12 @@ import {Header} from './Header';
 import {Home} from './routes/Home';
 import '../styles/Root.css';
 import PropTypes from 'prop-types';
-import {CARDSLIST_API_URL} from '../helper/define';
-import {fetchData} from '../helper/functions';
 import {CreateList} from './routes/CreateList';
 import {DisplayList} from './routes/DisplayList';
 
 class Root extends React.Component {
   componentDidMount() {
-    this.fetchLists();
-  }
-  fetchLists() {
-    const p = d => {
-      this.loadList(d.data);
-      this.setState({
-        loadedData: true
-      });
-    };
-    const ep = () => {
-      this.setState({
-        requestFailed: true
-      });
-    };
-    fetchData(`${CARDSLIST_API_URL}lists`, p, ep);
+    // TODO
   }
   constructor(props) {
     super(props);

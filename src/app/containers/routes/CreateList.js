@@ -5,6 +5,7 @@ import {fetchData} from '../../helper/functions';
 import '../../styles/CreateList.css';
 import {Selector} from '../../components/Selector';
 import {MAGIC_API_URL} from '../../helper/define';
+import {Selected} from '../../components/Selected';
 
 export class CreateList extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export class CreateList extends React.Component {
       loadedData: false,
       selectorData: [],
       typedValue: '',
+      localCardsList: [],
       lastAPICall: 0,
       classNames: {
         input: 'form-control',
@@ -26,9 +28,11 @@ export class CreateList extends React.Component {
   }
   onClick(value) {
     debugger;
-    alert(this.state.selectorData[value].title)
+    const localCardsList = JSON.parse(JSON.stringify(this.state.localCardsList));
+    localCardsList.push(this.state.selectorData[value]);
     this.setState({
-      selectorData: []
+      selectorData: [],
+      localCardsList: localCardsList
     });
   }
   onChange(value) {
@@ -44,20 +48,22 @@ export class CreateList extends React.Component {
       return;
     }
 
-    let timeNow = new Date().valueOf();
+    const timeNow = new Date().valueOf();
     if (timeNow - this.state.lastAPICall > 500) {
       const p = d => {
         if (d.cards.length > 0) {
-          let data = [];
-          let objName = {};
+          const data = [];
+          const objName = {};
           let j = 0;
           for (let i = 0; i < d.cards.length; i++) {
-            let key = btoa(d.cards[i].name);
+            const key = btoa(d.cards[i].name);
             if (!objName[key]) {
               objName[key] = 1;
               data.push({
                 title: d.cards[i].name,
-                value: j
+                value: j,
+                qty: 1,
+                id: d.cards[i].multiverseid
               });
               j++;
             }
@@ -101,11 +107,13 @@ export class CreateList extends React.Component {
       <Main>
         <div>
           <p>Create List</p>
+          <Selected items={this.state.localCardsList} />
           <Selector
             classNames={this.state.classNames}
             onChange={this.onChange}
             onClick={this.onClick}
             selectorData={this.state.selectorData}
+            placeholder={'Type a card name here...'}
           />
         </div>
       </Main>

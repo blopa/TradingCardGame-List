@@ -11,7 +11,7 @@ export class Selector extends React.Component {
     this.onFocusOut = this.onFocusOut.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.state = {
-      typedValue: '',
+      typedValue: ''
     };
   }
   onChange(e) {
@@ -28,8 +28,8 @@ export class Selector extends React.Component {
     e.target.value = '';
   }
   onFocusOut() {
-    let hovers = document.querySelectorAll(':hover');
-    let hover = hovers[hovers.length- 1];
+    const hovers = document.querySelectorAll(':hover');
+    const hover = hovers[hovers.length - 1];
     if (hover) {
       if (!hover.hasAttribute('selector_list_item')) {
         this.props.onChange('');
@@ -44,28 +44,27 @@ export class Selector extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div id="selector-comp">
         <input
           type="text"
           className={this.props.classNames.input}
           onChange={this.onChange}
           onBlur={this.onFocusOut}
           onFocus={this.onFocus}
+          placeholder={this.props.placeholder}
         />
         <div>
           {this.props.selectorData.length > 0 ? (
             <ul className={this.props.classNames.list}>
-              {this.props.selectorData.map(function (data, key) {
-                return (
-                  <li
-                    onClick={this.onClick}
-                    className={this.props.classNames.list_item}
-                    key={key}
-                    value={data.value}
-                    selector_list_item=""
-                  >{data.title}</li>
-                )
-              }.bind(this))}
+              {this.props.selectorData.map((data, key) => (
+                <li
+                  onClick={this.onClick}
+                  className={this.props.classNames.list_item}
+                  key={key}
+                  value={data.value}
+                  selector_list_item=""
+                >{data.title}</li>
+              ), this)}
             </ul>
           ) : null}
         </div>
@@ -79,5 +78,6 @@ Selector.propTypes = {
   classNames: PropTypes.object,
   onClick: PropTypes.func,
   selectorData: PropTypes.array,
+  placeholder: PropTypes.string,
   onChange: PropTypes.func
 };
