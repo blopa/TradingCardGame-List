@@ -147,7 +147,7 @@ export class CreateList extends React.Component {
     return (
       <Main>
         <div id="create-list">
-          <h1>Create List</h1>
+          <h1>Create a TCG List</h1>
           <hr/>
           <Selected
             items={this.state.localCardsList}

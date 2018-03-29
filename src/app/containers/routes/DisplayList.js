@@ -31,7 +31,7 @@ export class DisplayList extends React.Component {
     return (
       <Main>
         <div id="display-list">
-          <h1>List</h1>
+          <h1>TCG List</h1>
           <div className="container">
             <div className="group">
               {this.state.cardsList.length > 0 ? (
