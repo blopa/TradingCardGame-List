@@ -1,5 +1,6 @@
 #selector-comp li:hover {
     cursor: pointer;
+    background: #efefef;
 }
 
 #selector-comp>div {

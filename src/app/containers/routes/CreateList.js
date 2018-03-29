@@ -65,7 +65,7 @@ export class CreateList extends React.Component {
     });
     const listString = btoa(JSON.stringify(list));
     this.setState({
-      listString: `${window.location.origin}/#/list/mtg/${listString}`
+      listString: `${window.location.origin}/cards_list/#/list/mtg/${listString}`
     });
   }
   generateList(e) {

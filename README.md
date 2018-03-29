@@ -1,7 +1,7 @@
 # TradingCardGame List
 
 # About
-This project
+Try it now: https://blopa.github.io/cards_list/
 
 # Development
 
