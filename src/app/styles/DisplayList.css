@@ -1,0 +1,26 @@
+#display-list .item {
+    list-style: none;
+}
+
+#display-list .display-image {
+    text-align: center;
+}
+
+#display-list .display-image img {
+    background-image: url(http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=439398&type=card);
+    min-height: 311px;
+}
+
+#display-list .group {
+    background: floralwhite;
+    padding: 1rem;
+    width: 100%;
+    display: table-cell;
+    margin: 0 1%;
+    border-radius: 0.5rem;
+    border: 1px solid #ddd;
+}
+
+#display-list .container {
+    display: flex;
+}

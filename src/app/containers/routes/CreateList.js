@@ -60,17 +60,16 @@ export class CreateList extends React.Component {
   updateListString(arr) {
     const list = JSON.parse(JSON.stringify(arr));
     list.forEach(item => {
-      delete item.title;
+      // delete item.title;
       delete item.value;
     });
     const listString = btoa(JSON.stringify(list));
     this.setState({
-      listString: `${window.location.origin}/list/mtg/${listString}`
+      listString: `${window.location.origin}/#/list/mtg/${listString}`
     });
   }
   generateList(e) {
     e.preventDefault();
-    debugger;
     e.target.listURL.select();
     document.execCommand('copy');
     e.target.submit.focus();

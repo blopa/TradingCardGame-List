@@ -9,9 +9,6 @@ import {CreateList} from './routes/CreateList';
 import {DisplayList} from './routes/DisplayList';
 
 class Root extends React.Component {
-  componentDidMount() {
-    // TODO
-  }
   constructor(props) {
     super(props);
     this.updateList = this.updateList.bind(this);
@@ -51,7 +48,7 @@ class Root extends React.Component {
         <Switch>
           <Route exact path="/" render={props => this.renderHome(props)}/>
           <Route exact path="/create" component={CreateList}/>
-          <Route exact path="/list/:hash" component={DisplayList}/>
+          <Route exact path="/list/:type/:hash" component={DisplayList}/>
           <Redirect to="/" />
         </Switch>
       </div>

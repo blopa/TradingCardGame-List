@@ -5,4 +5,6 @@ ul {
 .main-container {
     background-color: aliceblue;
     padding: 1rem;
+    border: 1px solid #c8dbec;
+    box-shadow: 15px 20px 30px 0 #888888;
 }
