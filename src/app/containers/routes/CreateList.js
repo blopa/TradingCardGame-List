@@ -16,6 +16,7 @@ export class CreateList extends React.Component {
       selectorData: [],
       typedValue: '',
       localCardsList: [],
+      listString: '',
       lastAPICall: 0,
       classNames: {
         input: 'form-control',
@@ -25,10 +26,11 @@ export class CreateList extends React.Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.incrementCardQty = this.incrementCardQty.bind(this);
+    this.updateListString = this.updateListString.bind(this);
+    this.changeCardQty = this.changeCardQty.bind(this);
     this.generateList = this.generateList.bind(this);
   }
-  incrementCardQty(key, type) {
+  changeCardQty(key, type) {
     const localCardsList = JSON.parse(JSON.stringify(this.state.localCardsList));
     if (type === 1) {
       localCardsList[key].qty += 1;
@@ -40,26 +42,38 @@ export class CreateList extends React.Component {
       }
     }
 
+    this.updateListString(localCardsList);
     this.setState({
       localCardsList: localCardsList
     });
   }
   onClick(value) {
     const localCardsList = JSON.parse(JSON.stringify(this.state.localCardsList));
-    localCardsList.push(this.state.selectorData[value]);
+    const item = JSON.parse(JSON.stringify(this.state.selectorData[value]));
+    localCardsList.push(item);
+    this.updateListString(localCardsList);
     this.setState({
       selectorData: [],
       localCardsList: localCardsList
     });
   }
-  generateList() {
-    debugger;
-    let listString = '';
-    this.state.localCardsList.forEach(card => {
-      listString += `${card.qty},${card.id};`;
+  updateListString(arr) {
+    const list = JSON.parse(JSON.stringify(arr));
+    list.forEach(item => {
+      delete item.title;
+      delete item.value;
     });
-
-    alert(btoa(listString));
+    const listString = btoa(JSON.stringify(list));
+    this.setState({
+      listString: `${window.location.origin}/list/mtg/${listString}`
+    });
+  }
+  generateList(e) {
+    e.preventDefault();
+    debugger;
+    e.target.listURL.select();
+    document.execCommand('copy');
+    e.target.submit.focus();
   }
   onChange(value) {
     // https://api.magicthegathering.io/v1/cards?name=masticore
@@ -133,11 +147,12 @@ export class CreateList extends React.Component {
   render() {
     return (
       <Main>
-        <div>
-          <p>Create List</p>
+        <div id="create-list">
+          <h1>Create List</h1>
+          <hr/>
           <Selected
             items={this.state.localCardsList}
-            qtyOnClick={this.incrementCardQty}
+            qtyOnClick={this.changeCardQty}
           />
           <Selector
             classNames={this.state.classNames}
@@ -146,7 +161,11 @@ export class CreateList extends React.Component {
             selectorData={this.state.selectorData}
             placeholder={'Type a card name here...'}
           />
-          <button onClick={this.generateList} type="button" className="btn btn-success">Generate</button>
+          <form onSubmit={this.generateList}>
+            <input type="text" name="listURL" value={this.state.listString} className="hidden-input"/>
+            <input className="form-control" type="text" value={this.state.listString} disabled/>
+            <button type="submit" className="btn btn-success" name="submit">Copy URL</button>
+          </form>
         </div>
       </Main>
     );
