@@ -1,4 +1,4 @@
-# CardsList Frontend
+# TradingCardGame List
 
 # About
 This project

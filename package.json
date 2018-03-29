@@ -1,7 +1,7 @@
 {
   "name": "cards-list",
   "version": "0.0.1",
-  "description": "Cards List Frontend",
+  "description": "TCG List",
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blopa/CardsList-Frontend.git"
+    "url": "git+https://github.com/blopa/TradingCardGame-List.git"
   },
   "author": "Pablo Montenegro",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/blopa/CardsList-Frontend/issues"
+    "url": "https://github.com/blopa/TradingCardGame-List/issues"
   },
-  "homepage": "https://github.com/blopa/CardsList-Frontend#readme",
+  "homepage": "https://github.com/blopa/TradingCardGame-List#readme",
   "dependencies": {
     "file-loader": "^1.1.9",
     "react": "^16.2.0",
